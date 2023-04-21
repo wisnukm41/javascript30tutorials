@@ -97,6 +97,78 @@
   </div>
 
 <script>
+    const items = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+
+    // MY SOLUTION
+    // let pressed = false;
+    // let lastChecked;
+
+    // function shiftPressed(e){
+    //   if( e.keyCode === 16) {
+    //     pressed = true;
+    //   } 
+    // }
+
+    // document.addEventListener('keydown', shiftPressed)
+    // document.addEventListener('keyup', () => { pressed = false })
+
+
+    // function withShift(i){
+    //     if(!pressed) {
+    //       lastChecked = i;
+    //       return;
+    //     };
+
+    //     if(i > lastChecked){
+    //       items.forEach((e, index) => {
+    //         if(index > lastChecked && index < i){
+    //           e.checked = true;
+    //         }
+    //       })
+    //     } else {
+    //       items.forEach((e, index) => {
+    //         if(index < lastChecked && index > i){
+    //           e.checked = true;
+    //         }
+    //       })
+    //     }
+
+
+    //     lastChecked = null;
+    // }
+
+    // items.forEach((element, i) => {
+    //   element.addEventListener('change', function () {withShift(i)});
+    // });
+
+    // Video Solution
+
+    let lastChecked;
+    
+    function handleCheck(e){
+      let inBetween = false;
+
+      if(e.shiftKey && this.checked){
+        
+        items.forEach(checkbox => {
+          console.log(checkbox)
+          if(checkbox === this || lastChecked === checkbox){
+            inBetween = !inBetween;
+          }
+          
+          if(inBetween){
+            checkbox.checked = true;
+          }
+        })
+
+
+      }
+      
+      lastChecked = this;
+    }
+
+    items.forEach(e => e.addEventListener('click', handleCheck));
+
 </script>
 </body>
 </html>
