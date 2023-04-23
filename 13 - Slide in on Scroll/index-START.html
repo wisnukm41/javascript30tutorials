@@ -44,6 +44,7 @@
   </div>
 
   <script>
+    // so it not always triggered
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -59,6 +60,27 @@
       };
     }
 
+    // get all sliding item
+    const images = document.querySelectorAll('.slide-in');
+
+    function slidingBoi(){
+      images.forEach(sliderimage => {
+        // halfway through
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderimage.height / 2;
+        // bottom of the image
+        const imageBottom = sliderimage.offsetTop + sliderimage.height;
+        const isHalfShown = slideInAt > sliderimage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+
+        if(isHalfShown && isNotScrolledPast){
+          sliderimage.classList.add('active');
+        } else {
+          // sliderimage.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', slidingBoi);
   </script>
 
   <style>

@@ -8,6 +8,21 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const secret = 'hello';
+
+  function keyCheck(e){
+    pressed.push(e.key)
+    pressed.splice(-secret.length-1, pressed.length - secret.length)
+    
+    const string = pressed.join('');
+    if(string.includes(secret)){
+      cornify_add()
+    }
+  }
+
+  document.addEventListener('keyup', keyCheck);
+
 </script>
 </body>
 </html>
