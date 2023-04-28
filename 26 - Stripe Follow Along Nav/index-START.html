@@ -221,6 +221,39 @@
 </style>
 
 <script>
+  const links = document.querySelectorAll('.cool > li');
+  const background = document.querySelector('.dropdownBackground');
+  const nav = document.querySelector('nav');
+  const navCoords = nav.getBoundingClientRect();
+
+  function mouseEnter(){
+    this.classList.add('trigger-enter');
+    background.classList.add('open');
+
+    setTimeout(() => {
+      if(this.classList.contains('trigger-enter')){
+        this.classList.add('trigger-enter-active')
+      }
+    }, 150);
+
+    const dropdown = this.querySelector('.dropdown');
+    const dropdownCoords = dropdown.getBoundingClientRect();
+   
+    background.style.setProperty('width', `${dropdownCoords.width}px`); 
+    background.style.setProperty('height', `${dropdownCoords.height}px`); 
+    background.style.setProperty('transform', `translate(${dropdownCoords.left}px,${dropdownCoords.top - navCoords.top}px )`); 
+
+  }
+
+  function mouseExit(){
+    this.classList.remove('trigger-enter','trigger-enter-active')
+    background.classList.remove('open');
+  }
+
+  links.forEach(link => link.addEventListener('mouseenter', mouseEnter));
+  links.forEach(link => link.addEventListener('mouseleave', mouseExit));
+
+
 </script>
 
 </body>

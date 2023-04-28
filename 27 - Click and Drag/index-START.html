@@ -36,6 +36,22 @@
   </div>
 
 <script>
+  const slider = document.querySelector('.items');
+
+  let keyDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => { keyDown = true; startX = e.pageX - slider.offsetLeft ; scrollLeft = slider.scrollLeft })
+  slider.addEventListener('mouseup', () => { keyDown = false })
+  slider.addEventListener('mouseleave', () => { keyDown = false })
+  slider.addEventListener('mousemove', (e) => {
+    if(!keyDown) return;
+
+    const walk = (e.pageX - startX) * 3; 
+
+    slider.scrollLeft = scrollLeft - walk;
+  })
 </script>
 
   </body>

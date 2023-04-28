@@ -43,6 +43,16 @@
 
 <button></button>
 <script>
+  const divs = document.querySelectorAll('div');
+
+  function logDiv(e){
+    console.log('hi')
+  }
+
+  divs.forEach(div => addEventListener('click', logDiv , {
+    capture:false,
+  }))
+
 
 </script>
 </body>
